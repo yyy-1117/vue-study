@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router v3.0.2.js"></script>
+    <style>
+    .myactive{
+        color: red;
+        background-color: green;
+    }
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translateX(150px)
+    }
+    .v-enter-active,
+    .v-leave-active{
+        transition: all 1s ease
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 切换路由 使用 <router-link> 功能与a标签相同 有两个属性 to: 需要跳转到的链接  tag: 替换成其他标签 -->
+            <!-- 它有默认的样式 可以修改样式达到点击高亮的需求  也可以通过 linkActiveClass 自定义样式 -->
+            <router-link to="/login?id=1" tag="a" >登录</router-link>
+            <router-link to="/register" tag="a">注册</router-link>
+        <!-- 需要在页面上 添加一个占位符 才能显示组件  <router-view> -->
+            <!-- 如果需要添加动画 和给单元素添加动画相同 使用 transition 包裹  添加 mode 属性可以设置 out-in  in-out 切换效果-->
+            <transition mode='out-in'>
+                    <router-view></router-view>
+            </transition>
+    </div>
+
+    <script>
+
+        let login = {
+            template:'<h3>登录 ------ {{ msg }} -----{{ $route.query.id}}</h3>',
+            data(){
+                return{
+                    msg:''
+                }
+            },
+            created() {
+                // 可以 通过 this.$route.query 方法 获取地址栏 ? 后面传递过来的参数   
+                // 使用 ? 传递参数不需要修改路由匹配规则
+                console.log( this.$route)
+                this.msg = this.$route.query.id
+            },
+        }
+
+        let register ={
+            template:'<h3>注册</h3>'
+        }
+        // 引入 vue-router 就会有一个全局的 VueRouter 构造函数
+        let router = new VueRouter({
+            routes:[ // 匹配规则 里面的每一项都是一个对象  都是一条匹配规则
+            // 每一个对象都必须有两个属性, 第一个属性是需要跳转的链接, 第二个属性是 组件模板对象  不能是组件模板的名称
+                {path:'/',redirect:'/login'},   // redirect 重定向, /  根目录自动跳转到 /login
+                {path:'/login',component:login},
+                {path:'/register',component:register}
+            ],
+            linkActiveClass:'myactive'
+        })
+    
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+
+            },
+            // 创建完路由对象后,必须挂载在VM实例上
+            router
+        })
+    </script>
+</body>
+</html>

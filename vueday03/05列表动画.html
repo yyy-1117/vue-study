@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+        li{
+            border: 1px dashed #999;
+            width: 100%;
+            list-style: none;
+        }
+        li:hover{
+            background-color: red;
+            transition: all 2s ease
+        }
+        .v-enter,
+        .v-leave-to{
+            transform: translateY(80px)
+        }
+        .v-enter-active,
+        .v-leave-active,
+        .v-more{
+            transition: all 1s ease
+        }
+
+        .v-leave-active{
+            position: absolute
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <label>
+            id:
+            <input type="text" v-model="id">   <!-- 双向数据绑定 -->
+        </label>
+        <label>
+            name:
+            <input type="text" v-model="name" @keyup.enter="add">  <!-- 键盘弹起事件 -->
+        </label>
+        <input type="button" value="添加" @click="add">
+        <!-- 如果需要给动态渲染的数据添加动画 需要使用 transition-group 包裹 
+        它会默认渲染一个span标签  可以通过 tag 更换成其他元素  appear 进入时就会执行一次动画 -->
+        <transition-group tag='ul' appear>
+                <li v-for="(item, i) in hero" :key="item.id" @click="del(i)">{{item.id}} ---- {{item.name}}</li>
+        </transition-group>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                id: '',
+                name: '',
+                hero: [{
+                        id: 1,
+                        name: "钢铁侠"
+                    },
+                    {
+                        id: 2,
+                        name: "蜘蛛侠"
+                    },
+                    {
+                        id: 3,
+                        name: "雷神"
+                    },
+                    {
+                        id: 4,
+                        name: "奇异博士"
+                    }
+                ]
+            },
+            methods: {
+                add(){
+                    this.hero.push({id:this.id, name:this.name})
+                    this.id = this.name = ''
+                },
+                del(id){
+                    this.hero.splice(id,1)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

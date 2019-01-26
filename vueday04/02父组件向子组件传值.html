@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 父组件向子组件传递数据 核心 在子组件上 v-bind  父组件上的数据,然后在子组件上 props上定义  -->
+        <com :pmsg='msg'></com>
+    </div>
+    <script>
+    
+     new Vue({
+         el:'#app',
+         data:{
+            msg:'我是实例中的数据'
+         },
+         methods: {
+             
+         },
+         components:{
+             com:{
+                 template:'<h3> 私有组件 ------ {{pmsg}} </h3>',
+                 props:['pmsg']
+             }
+         }
+     })
+    
+    </script>
+</body>
+</html>

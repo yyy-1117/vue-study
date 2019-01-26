@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <link rel="stylesheet" href="../lib/animate.css">
+</head>
+<body>
+    <div id="app">
+        <input type="button" @click="flag=!flag" value="toggle">
+        <!-- 
+            enter-active-class="bounce"   设置入场的动画效果
+            leave-active-class="bounceOut" 设置退出的动画效果
+         -->
+        <!-- :duration="{ enter: 200, leave: 400 }"  来分别设置 入场的时长 和 离场的时长 -->
+        <transition
+        enter-active-class="jello" 
+        leave-active-class="bounceOutDown"
+        :duration="{ enter: 5000, leave: 1000 }" >
+        <h3 v-show="flag" class="animated">使用第三方类库 实现动画</h3>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                flag : false
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>

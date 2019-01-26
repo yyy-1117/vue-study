@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router v3.0.2.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用 this.$route.query 方法可以获取 ? 后面的参数 -->
+        <router-link to="/login?id=1">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+
+        let login = {
+            template:'<h3>登陆 -----{{ $route.query.id}}</h3>',
+            created(){
+                // 在该生命周期函数中 获取传递过来的参数
+                console.log(this.$route.query)
+            }
+        }
+
+        let register ={
+            template:'<h3>注册</h3>'
+        }
+
+        let router = new VueRouter({
+            routes:[
+                // 获取 ? 后面传递的参数 使用 this.$route.query 方法 不需要修改匹配规则
+                {path:'/login',component:login},
+                {path:'/register',component:register}
+            ]
+        })
+
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods: {
+                
+            },
+            router
+        })
+    </script>
+</body>
+</html>

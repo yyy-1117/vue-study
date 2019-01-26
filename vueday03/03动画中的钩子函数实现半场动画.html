@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+        .ball{
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用Vue中的动画钩子函数实现半场动画 -->
+        <button @click="flag=!flag">点击</button>
+        <!-- 使用Vue动画 需要  transition 包裹  在其中添加钩子函数-->
+        <transition 
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter">
+            <div class="ball" v-show="flag"></div>
+        </transition>
+    </div>
+    <script>
+      new Vue({
+          el:"#app",
+          data:{
+            flag:true
+          },
+          methods: {
+            //   el 就是当前需要实现动画的DOM元素
+            beforeEnter(el){
+                // 动画入场时执行
+                el.style.transform = 'translate(0,0)'
+
+            },
+            enter(el,done){
+                // 动画正在进行中
+                el.offsetWidth  // 强制刷新动画 必须写
+                el.style.transform = 'translate(150px,400px)'
+                el.style.transition = 'all 1s ease'
+                // done 相当于 afterEnter 的调用
+                done()
+
+            },
+            afterEnter(el){
+                // 动画结束时执行
+                this.flag = !this.flag
+
+            }
+          },
+      })
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+        /* 入场和退出动画  添加需要实现的效果*/
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px)
+        }
+        /* 入场完成的时间段和退出结束的时间段  添加 transition */
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="falg=!falg">
+        <!-- 使用Vue 中的动画 需要用  transition 包裹起来 Vue官方定义的-->
+        <transition>
+            <h3 v-show="falg">使用 Vue的动画</h3>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                falg:true
+            },
+            methods: {
+                
+            },
+        })
+    
+    </script>
+</body>
+</html>

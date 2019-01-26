@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-resource-1.3.4.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" @click="get" value="发送get请求">
+        <input type="button" @click="post" value="发送post请求">
+        <input type="button" @click="jsonp" value="发送jsonp请求">
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods: {
+                get(){
+                    // get 请求 第一个参数 URL 
+                    this.$http.get('http://vue.lovegf.cn:8899/api/getprodlist').then( result => {
+                        console.log(result)
+                    })
+                },
+                post(){
+                    // post 请求 第一个参数 URL 第二个参数对象要传入的参数 第三个参数对象 设置请求头
+                    this.$http.get('http://vue.lovegf.cn:8899/api/getprodlist',{},{ emulateJSON:true}).then( result => {
+                        console.log(result)
+                    })
+                },
+                jsonp(){
+                    this.$http.get('http://vue.lovegf.cn:8899/api/getprodlist').then( result => {
+                        console.log(result)
+                    })
+                }
+            },
+        })
+    
+    </script>
+</body>
+</html>

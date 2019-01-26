@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+    /* 入场和退出动画是添加的类名 */
+    .my-enter,
+    .my-leave-to{
+        opacity: 0;
+        transform: translateX(100px)
+    }
+    .my-enter-active,
+    .my-leave-active{
+        transition: all 1s ease
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <!-- 如果使用Vue 中的动画 需要用 transition 包裹 -->
+        <!-- 添加name 属性可以自定义前缀  默认为 .v-enter -->
+        <transition name="my">
+                <h3 v-show="flag">使用Vue 实现动画效果</h3>        
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                flag: true
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>

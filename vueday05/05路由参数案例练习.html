@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router v3.0.2.js"></script>
+    <style>
+        ul{
+            list-style: none;
+        }
+        li{
+            border: 1px dashed #ccc;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+
+    <!-- 列表页 -->
+    <template id="newListComponent">
+        <div>
+            <ul>
+                <!-- 重点: 使用 v-bind 绑定属性 可以在属性上面写JS 代码 从而将id 传递过去  -->
+                <router-link :to='"/info?id="+item.id' tag="li"
+                v-for="item in heroes":key='item.id'>
+                    <p>名称:{{item.name}}</p>
+                    <p>能力:{{item.superPower}}</p>
+                </router-link>
+            </ul>
+        </div>
+    </template>
+
+    <!-- 详情页 -->
+    <template id="newInfoComponent">
+        <div>
+            <h3>{{ $route.query.id}}</h3>
+        </div>
+    </template>
+    <script>
+    
+    let index = {
+        template:'#newListComponent',
+        data(){
+            return{
+                heroes:[
+                    {id:1,name:'美国队长',superPower:'身体素质远超常人'},
+                    {id:2,name:'钢铁侠',superPower:'有钱'},
+                    {id:3,name:'绿巨人',superPower:'变身成绿巨人'},
+                    {id:4,name:'雷神',superPower:'神'},
+                ]
+            }
+        }
+    }
+    let info = {
+        template:'#newInfoComponent'
+    }
+
+    let router = new VueRouter({
+        routes:[
+            {path:'/index',component:index},
+            {path:'/info',component:info},
+        ]
+    })
+    
+    let vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+
+        },
+        router
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router v3.0.2.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login/zs">登录</router-link>
+        <router-link to="/login/ls">注册</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+
+        let login = {
+            template:"<h3>登录 ----- {{ $route.params.name }}</h3>",
+            created() {
+                console.log(this.$route.params)
+            },
+        }
+        
+        let register ={
+            template:"<h3>注册 ----- {{ $route.params.name }}</h3>",
+            created() {
+                console.log(this.$route.params)
+            },
+        }
+        
+        const router = new VueRouter({
+            routes:[
+                // 使用 this.$route.params  可以获取 /: 后面的参数   需要修改匹配规则
+                {path:'/login/:name',component:login},
+                {path:'/register/:name',component:register}
+
+            ]
+        })
+
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods: {
+                
+            },
+            router
+        })
+    </script>
+</body>
+</html>

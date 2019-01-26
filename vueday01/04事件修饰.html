@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+        .div1 {
+            width: 100%;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- .stop  阻止事件冒泡 -->
+        <div @click='div1' class="div1">
+            <button @click.stop="btn">点击</button>
+        </div>
+        <!-- .prevent 阻止默认跳转 -->
+        <a href="https://www.baidu.com" @click.prevent='prevent'>跳转</a>
+
+        <!-- .capture 事件捕获 -->
+        <div class="div1" @click.capture='div2'>
+            <div @click.capture='btn1'>事件捕获
+                <div @click.capture='btn2'>事件捕获
+                    <div @click.capture='btn3'>事件捕获</div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- .once 事件只触发一下 -->
+        <button @click.once='once'>once</button>
+
+        <!-- .self 阻止自身的冒泡 -->
+        <div @click='div1' class="div1">
+            <div @click="btn">点击
+                <div @click.self="btn4">self</div>
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                div1() {
+                    console.log("触发了 div1")
+                },
+                btn() {
+                    console.log("触发了 btn")
+                },
+                prevent() {
+                    console.log('阻止默认跳转')
+                },
+                div2() {
+                    console.log('触发了事件捕获')
+                },
+                btn1() {
+                    console.log('触发了事件捕获btn1')
+                },
+                btn2() {
+                    console.log('触发了事件捕获btn2')
+                },
+                btn3() {
+                    console.log('触发了事件捕获btn3')
+                },
+                once() {
+                    console.log('事件只触发一次 once')
+                },
+                btn4() {
+                    console.log('设置了self')
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

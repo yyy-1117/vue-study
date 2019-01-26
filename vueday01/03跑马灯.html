@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../lib/vue.js"></script>      
+    </head>
+    <body>
+        <div id="app">
+            <p>{{msg}}</p>
+            <button @click="start">开始</button>
+            <button @click="stop">停止</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"让文字实现跑马灯效果",
+                    tiemId:null
+                },
+                methods:{
+                    start(){
+                        clearInterval(this.tiemId)
+                    this.tiemId = setInterval(() => {
+                            let str = this.msg.substring(0,1)
+                            let end = this.msg.substring(1)
+                            this.msg = end + str
+                        }, 400);
+                    },
+                    stop(){
+                        clearInterval(this.tiemId)
+                        this.tiemId = null;
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

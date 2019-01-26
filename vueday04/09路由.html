@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router v3.0.2.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px)
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 1s ease
+        }
+        .myactive{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+            <router-link to="/login" >登录</router-link>
+            <router-link to="/register" >注册</router-link>
+
+            <transition mode='out-in'>
+                    <router-view></router-view>
+            </transition>
+    </div>
+
+    <script>
+        let login = {
+            template:'<h3>登录组件</h3>'
+        }
+
+        let register = {
+            template:'<h3>注册组件</h3>'
+        }
+
+        // 引入vue-router 就会有一个 VueRouter 构造函数
+       let router = new VueRouter({
+        //    routes 路由中的匹配规则
+           routes:[
+            //   每一个路由规则都是一个对象,这个规则上必须有两个属性
+            // 第一个 path  表示监听的路由链接
+            // 第二个 component 的属性值 必须是一个组件模板的对象 不能是组件模板的引用名称
+               {path:'/',redirect:'/login'},   // redirect 重定向 根目录默认为 login
+               {path:'/login',component: login}, 
+               {path:'/register',component:register}
+           ],
+           linkActiveClass:'myactive'   // 自定义类名
+       })
+    
+    new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+
+        },
+        router  // 将创建的路由挂载在VM实例中
+    })
+    </script>
+</body>
+</html>

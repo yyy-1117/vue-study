@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='first'>+
+        <input type="text" v-model='next'>=
+        <input type="text" v-model='fruit'>
+    </div>
+ 
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                first:'',
+                next:'',
+                fruit:''
+            },
+            methods: {
+
+            },
+            watch: {  // 监听data 中的数据或 VM实例上的属性  只要发生变化就会触发对应的函数体
+                // 方法名 就是对应监视的属性  该方式中有两个属性 newVal : 最新的数据 oldVal : 修改前的数据
+                first(newVal,oldVal){
+                    console.log(newVal,'-----', oldVal)
+                    this.fruit = this.first + '-' + this.next
+                },
+                next(){
+                    this.fruit = this.first + '-' + this.next
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

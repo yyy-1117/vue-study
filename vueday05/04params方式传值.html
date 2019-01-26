@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router v3.0.2.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login/1">登录</router-link>
+        <router-link to="/register/zs">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script>
+
+        let login = {
+            template:'<h3>登录 ----- {{ $route.params.id}}</h3>',
+            created() {
+                console.log(this.$route.params.id)
+            },
+        }        
+
+        let register ={
+            template:'<h3>注册 ------ {{ $route.params.name}}</h3>',
+            created(){
+                console.log(this.$route.params.name)
+            }
+        }
+    
+        const router = new VueRouter({
+            routes:[
+                // 使用 /:id  方式传递传输 需要修改路由匹配规则 
+                {path:'/login/:id',component:login},
+                {path:'/register/:name',component:register}
+            ]
+        })
+
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods: {
+                
+            },
+            router
+        })
+    
+    </script>
+</body>
+</html>
