@@ -1,44 +1,44 @@
-# day01
+## day01
 
-#### [笔记](./notes/vueday01.md)
+#### [笔记](./notes/day01.md)
 
-#### [代码](./vueday01)
+#### [代码](./day01)
 
-# day02
+## day02
 
-#### [笔记](./notes/vueday02.md)
+#### [笔记](./notes/day02.md)
 
-#### [代码](./vueday02)
+#### [代码](./day02)
 
-# day03
+## day03
 
-#### [笔记](./notes/vueday03.md)
+#### [笔记](./notes/day03.md)
 
-#### [代码](./vueday03)
+#### [代码](./day03)
 
-# day04
+## day04
 
-#### [笔记](./notes/vueday04.md)
+#### [笔记](./notes/day04.md)
 
-#### [代码](./vueday04)
+#### [代码](./day04)
 
-# day05
+## day05
 
-#### [笔记](./notes/vueday05.md)
+#### [笔记](./notes/day05.md)
 
-#### [代码](./vueday05)
+#### [代码](./day05)
 
-# day06
+## day06
 
-#### [笔记](./notes/vueday06.md)
+#### [笔记](./notes/day06.md)
 
-#### [代码](./vueday06)
+#### [代码](./day06)
 
-# day07
+## day07
 
-#### [笔记](./notes/vueday07.md)
+#### [笔记](./notes/day07.md)
 
-#### [代码](./vueday07)
+#### [代码](./day07)
 
 
 
