@@ -6,6 +6,8 @@ const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 module.exports = {
     entry: './src/main.js', // 配置入口文件路径
     output: {
@@ -25,7 +27,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "标题",
             template: './src/index.html'
-        })
+        }),
+        new VueLoaderPlugin()
     ],
     module: {
         rules: [
@@ -51,7 +54,8 @@ module.exports = {
                     loader: 'url-loader'
                 }]
             },
-            { test: /\.js$/,  loader: "babel-loader" ,exclude: /node_modules/}   //  exclude 排除 node_modelus 中的JS文件
+            { test: /\.js$/,  loader: "babel-loader" ,exclude: /node_modules/},  //  exclude 排除 node_modelus 中的JS文件
+            { test: /\.vue$/, use: 'vue-loader' }
 
         ]
     }
