@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 通过 v-on 自定义事件绑定父组件上的函数 -->
+        <item @get="set"></item>
+        {{total}}
+    </div>
+    <script>
+        let item={
+            data() {
+                return {
+                    num:1
+                }
+            },
+            template:"<div @click='addData'>{{num}}</div>",
+            methods: {
+                addData(){
+                    // this.num = this.num +2
+                    this.$emit('get',2) // 子组件通过 $emit 方法向父组件传值, 第一个参数是绑定在子组件上的自定义事件名,第二个参数及以后都可以向父组件传值
+                }
+            },
+
+        }
+
+        new Vue({
+            el:"#app",
+            data:{
+                total:5
+            },
+            methods: {
+                set(data){   // 此时的 data  就对应 $emit 方法中的第二个参数
+                    this.total+=data
+                }
+            },
+            components:{
+                item
+            }
+        })
+    </script>
+</body>
+</html>

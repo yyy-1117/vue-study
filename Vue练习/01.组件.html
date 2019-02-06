@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <temp></temp>
+    </div>
+
+    <template id="temp">
+        <h2>这是私有组件</h2>
+    </template>
+    <script>
+
+    let vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods: {
+            
+        },
+        components:{   // VM 实例上 components 创建组件, 其中每一个对象名就是要在app容器中渲染的标签,
+                       //其中template属性可以写html结构,或者id,然后在app容器外用 template标签包裹
+            temp:{
+                template:"#temp"
+            }
+        }
+    })
+    </script>
+</body>
+</html>

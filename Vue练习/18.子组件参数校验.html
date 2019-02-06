@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用 v-bind 传递过来的都是 数值类型 -->
+        <child :content="10"></child>
+    </div>
+    <script>
+        Vue.component('child',{
+            // props:{
+            //     content:String   // 父组件传递过来的是数值类型,只能接收传递字符串类型
+            //     /* valid prop: type check failed for prop "content". Expected String with value "10", got Number with value 10. */
+            // },
+            props:{
+                content:[Number,String]
+            },
+            template:"<p>{{content}}</p>"
+        })
+
+        new Vue({
+            el:"#app",
+            data:{},
+
+        })
+    </script>
+</body>
+</html>

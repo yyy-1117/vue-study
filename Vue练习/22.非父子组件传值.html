@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child content="hello"></child>
+        <child content="world"></child>
+    </div>
+    <script>
+        Vue.prototype.busss = new Vue()   // 在Vue的原型上绑定一个bus属性,那么每一个 new Vue() 对象上都会有一个 bus 属性
+
+        Vue.component('child',{
+            props:{
+                content:String
+            },
+            data(){
+                return{
+                    msg:this.content
+                }
+            },
+            template:"<div @click='handle'>{{msg}}</div>",
+            methods:{
+                handle(){
+                    this.busss.$emit('change',this.msg)    // 使用实例对象上的 bus 属性 对外发送事件
+                }
+            },
+            mounted() {
+                this.busss.$on('change',(val) => {      //  这里使用实例上的bus 属性监听传递过来的事件
+                    console.log(val)
+                    this.msg = val
+                })
+            },
+        })
+    
+        new Vue({
+            el:"#app",
+            data:{},
+            methods:{}
+        })
+    </script>
+</body>
+</html>

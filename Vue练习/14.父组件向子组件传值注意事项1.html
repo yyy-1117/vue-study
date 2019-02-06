@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>父组件向子组件传值,如果不使用 v-bind 绑定,则传递过去的是字符串类型</h2>
+        <item1 conter="0"></item1>
+        <item1 conter="1"></item1>
+        <hr>
+        <h2>父组件向子组件传值,如果使用 v-bind 绑定,则传递过去的是数值类型</h2>
+        <item2 :conter="0"></item2>
+        <item2 :conter="1"></item2>
+        <hr>
+        <item3 :pmsg='msg'></item>
+
+    </div>
+    <script>
+        let item1 ={
+            template:"<p>不使用v-bind</p>",
+            props:['conter'],
+            created() {
+                console.log(typeof(this.conter))
+            },
+        }
+
+        let item2 ={
+            template:"<p>使用v-bind</p>",
+            props:['conter'],
+            created() {
+                console.log(typeof(this.conter))
+            },
+        }
+
+        let item3 ={
+            template:"<p>这是父组件向子组件传递过来的值:{{pmsg}}</p>",
+            props:['pmsg']
+        }
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"父组件中的值"
+            },
+            methods: {
+                
+            },
+            components:{
+                item1,
+                item2,
+                item3
+            }
+        })
+    </script>
+</body>
+</html>

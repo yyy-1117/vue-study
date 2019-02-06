@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 如果不加key 前面 input中输入的数据会覆盖后面 input 中的数据 -->
+        <div>
+        不加key:
+            用户名: <input type="text" v-if="flag">
+            邮箱:<input type="text" v-else-if>
+            <hr>
+        加key:
+            用户名: <input type="text" v-if="flag" key="username">
+            邮箱:<input type="text" v-else-if key="usermail">
+            <!-- 加 key 不能单独包裹在一个div里 ???? -->
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                flag:true
+            },
+            methods: {
+                change(){
+                    setTimeout( () =>{
+                        this.flag = false
+                    },6000)
+                }
+            },
+            mounted() {
+                this.change()
+            },
+        })
+    
+    </script>
+</body>
+
+</html>

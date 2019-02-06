@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <item ref="one" @myset="myGet"></item>   <!-- 不建议使用驼峰命名命名自定义事件 -->
+        <item ref="two" @myset="myGet"></item>
+        <p> 上面两个子组件的总和是: {{total}}</p>
+    </div>
+    <script>
+        Vue.component('item',{
+            data() {
+                return {
+                    num:0
+                }
+            },
+            template:"<div @click='add'>{{num}}</div>",
+            methods:{
+                add(){
+                    this.num++,
+                    this.$emit("myset") 
+                }
+            }
+        })
+
+        new Vue({
+            el:"#app",
+            data:{
+                total:0
+            },
+            methods:{
+                myGet(){
+                    console.log(this.$refs.one)
+                    console.log(this.$refs.two)
+                    this.total = this.$refs.one.num + this.$refs.two.num
+                }
+            }
+        })
+    
+    </script>
+</body>
+</html>

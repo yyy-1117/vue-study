@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+    .actives{
+        background-color: red;
+    }
+    .red{
+        color: red
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 绑定的如果是变量 不需要加引号,如果是样式就必须加引号 -->
+        <p :class="[active]" @click="change">{{msg}}</p>
+        <p :class="['red']">1111</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:'hello world',
+                active:'actives'
+            },
+            methods: {
+                change(){
+                    this.active = this.active === 'actives' ? '' : 'actives'
+                }
+            },
+        })
+    
+    </script>
+</body>
+</html>

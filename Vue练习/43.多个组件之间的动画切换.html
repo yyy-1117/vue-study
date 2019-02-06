@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 3s
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition mode="out-in">
+        <component :is="flag"></component>
+        </transition>
+        <button @click="change">切换组件</button>
+    </div>
+    <script>
+        Vue.component('one',{
+            template:"<p>我是组件one</p>"
+        })
+        Vue.component('two',{
+            template:"<p>我是组件two</p>"
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                flag:'one'
+            },
+            methods: {
+                change(){
+                    this.flag = this.flag === 'one' ? 'two':'one'
+                }
+            },
+        })
+    </script>
+</body>
+</html>
